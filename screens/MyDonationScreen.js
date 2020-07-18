@@ -21,7 +21,7 @@ export default class MyDonationScreen extends Component {
 
    static navigationOptions = { header: null };
    getDonorDetails=(donorId)=>{
-     db.collection("users").where("email_id","==", donorId).get()
+     db.collection("Users").where("email","==", donorId).get()
      .then((snapshot)=>{
        snapshot.forEach((doc) => {
          this.setState({

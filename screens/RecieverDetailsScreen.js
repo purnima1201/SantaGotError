@@ -10,6 +10,7 @@ export default class RecieverDetailsScreen extends Component{
     super(props);
     this.state={
       userId          : firebase.auth().currentUser.email,
+      userName:"",
       recieverId      : this.props.navigation.getParam('details')["user_id"],
       requestId       : this.props.navigation.getParam('details')["request_id"],
       bookName        : this.props.navigation.getParam('details')["book_name"],
@@ -24,7 +25,7 @@ export default class RecieverDetailsScreen extends Component{
 
 
 getRecieverDetails(){
-  db.collection('users').where('email_id','==',this.state.recieverId).get()
+  db.collection('Users').where('email','==',this.state.recieverId).get()
   .then(snapshot=>{
     snapshot.forEach(doc=>{
       this.setState({
@@ -72,7 +73,7 @@ componentDidMount(){
   this.getRecieverDetails()
 }
 getUserDetails=(userId)=>{
-  db.collection("users").where('email_id','==', userId).get()
+  db.collection("Users").where('email','==', userId).get()
   .then((snapshot)=>{
     snapshot.forEach((doc) => {
       this.setState({
@@ -130,6 +131,7 @@ getUserDetails=(userId)=>{
                   style={styles.button}
                   onPress={()=>{
                     this.updateBookStatus()
+                    this.addNotification()
                     this.props.navigation.navigate('MyDonations')
                   }}>
                 <Text>I want to Donate</Text>

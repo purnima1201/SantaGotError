@@ -53,7 +53,7 @@ export default class BookRequestScreen extends Component{
          "date"       : firebase.firestore.FieldValue.serverTimestamp()
     })
     await  this.getBookRequest()
-    db.collection('Users').where("email_id","==",userId).get()
+    db.collection('Users').where("email","==",userId).get()
     .then()
     .then((snapshot)=>{
       snapshot.forEach((doc)=>{
@@ -82,7 +82,7 @@ export default class BookRequestScreen extends Component{
   }
   getIsBookRequestActive(){
     db.collection('Users')
-    .where('email_id','==',this.state.userId)
+    .where('email','==',this.state.userId)
     .onSnapshot(querySnapshot => {
       querySnapshot.forEach(doc => {
         this.setState({
@@ -112,7 +112,7 @@ export default class BookRequestScreen extends Component{
 
 sendNotification=()=>{
   //to get the first name and last name
-  db.collection('Users').where('email_id','==',this.state.userId).get()
+  db.collection('Users').where('email','==',this.state.userId).get()
   .then((snapshot)=>{
     snapshot.forEach((doc)=>{
       var name = doc.data().first_name
@@ -149,7 +149,7 @@ updateBookRequestStatus=()=>{
     book_status : 'recieved'
   })
   //getting the  doc id to update the users doc
-  db.collection('Users').where('email_id','==',this.state.userId).get()
+  db.collection('Users').where('email','==',this.state.userId).get()
   .then((snapshot)=>{
     snapshot.forEach((doc) => {
       //updating the doc

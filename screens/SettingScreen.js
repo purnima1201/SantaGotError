@@ -27,7 +27,7 @@ export default class SettingScreen extends Component{
 
   getUserDetails=()=>{
     var email = firebase.auth().currentUser.email;
-    db.collection('Users').where('email_id','==',email).get()
+    db.collection('Users').where('email','==',email).get()
     .then(snapshot => {
       snapshot.forEach(doc => {
       var data = doc.data()

@@ -51,8 +51,9 @@ export default class SwipeableFlatlist extends Component{
           subtitle={data.item.message}
           bottomDivider
         />
-      </Animated.View>
+    </Animated.View>
   );
+
 
   renderHiddenItem = () => (
       <View style={styles.rowBack}>
